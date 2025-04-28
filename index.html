@@ -22,3 +22,160 @@
             align-items: center;
             position: relative;
         }
+
+        /* Yıldız animasyonu */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(-100%, -100%);
+            }
+        }
+
+        .moon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .moon-text {
+            font-size: 10px;
+            color: transparent;
+            transition: opacity 0.3s ease;
+        }
+
+        .moon:hover .moon-text {
+            opacity: 1;
+        }
+
+        .content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        #galaxy-text {
+            font-size: 72px;
+            letter-spacing: 5px;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+
+        #subtext {
+            font-size: 24px;
+            font-family: 'Arimo', sans-serif;
+            color: white;
+            opacity: 0;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%) translateY(50%);
+            animation: fadeSubtext 5s 3s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeSubtext {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(50%);
+            }
+            10% {
+                opacity: 0.8;
+                transform: translateX(-50%) translateY(50%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(50%);
+            }
+        }
+
+        /* Light Burst Animation */
+        @keyframes lightBurst {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="moon" id="moon">
+        <span class="moon-text">Ana Sayfa</span>
+    </div>
+
+    <div class="stars" id="stars"></div>
+
+    <div class="content">
+        <h1 id="galaxy-text">SİYAH GALAKSİ</h1>
+        <p id="subtext">Siyahı Seven Biri</p>
+    </div>
+
+    <script>
+        // Yıldızlar animasyonu
+        for (let i = 0; i < 100; i++) {
+            let star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDuration = `${Math.random() * 10 + 60}s`;
+            document.getElementById('stars').appendChild(star);
+        }
+
+        // Dolunay tıklama animasyonu
+        document.getElementById('moon').addEventListener('click', function() {
+            let lightBurst = document.createElement('div');
+            lightBurst.classList.add('light-burst');
+            document.body.appendChild(lightBurst);
+            setTimeout(() => {
+                lightBurst.remove();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
